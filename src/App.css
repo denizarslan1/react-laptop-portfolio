@@ -1,42 +1,362 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+/* Laptop Container */
+.laptop-container {
+  position: absolute;
+  bottom: 80px;
+  left: 50%;
+  transform-origin: center bottom;
+  transform-style: preserve-3d;
+  width: 500px;
+  height: 350px;
+  margin-left: -250px;
+  transition: all 0.1s ease-out;
+}
+
+/* Laptop Base (Bottom Part) */
+.laptop-base {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 40px;
+  background: linear-gradient(135deg, #9ca3af 0%, #6b7280 50%, #4b5563 100%);
+  border-radius: 0 0 25px 25px;
+  box-shadow: 
+    0 8px 32px rgba(0,0,0,0.4),
+    inset 0 2px 4px rgba(255,255,255,0.1);
+  z-index: 1;
+}
+
+/* Keyboard Area */
+.keyboard-area {
+  position: absolute;
+  top: -35px;
+  left: 8px;
+  right: 8px;
+  height: 35px;
+  background: linear-gradient(to bottom, #e5e7eb 0%, #d1d5db 50%, #9ca3af 100%);
+  border-radius: 8px 8px 0 0;
+  border: 1px solid #6b7280;
+  padding: 4px;
+}
+
+/* Keyboard Grid */
+.keyboard-grid {
+  display: grid;
+  grid-template-columns: repeat(15, 1fr);
+  gap: 1px;
+  height: 100%;
+}
+
+.key {
+  background: linear-gradient(to bottom, #4b5563, #374151);
+  border-radius: 2px;
+  border: 0.5px solid #6b7280;
+  transition: all 0.1s ease;
+}
+
+.key:hover {
+  background: linear-gradient(to bottom, #6b7280, #4b5563);
+}
+
+/* Trackpad */
+.trackpad {
+  position: absolute;
+  top: -55px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 50px;
+  background: linear-gradient(to bottom, #6b7280, #4b5563);
+  border: 1px solid #374151;
+  border-radius: 8px;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
+}
+
+/* Laptop Screen (Top Part) */
+.laptop-screen {
+  position: absolute;
+  top: -310px;
+  left: 0;
+  width: 100%;
+  height: 310px;
+  transform-origin: bottom center;
+  transform-style: preserve-3d;
+  transition: transform 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  z-index: 2;
+}
+
+/* Screen Bezel */
+.screen-bezel {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #6b7280 0%, #4b5563 50%, #374151 100%);
+  border-radius: 12px 12px 0 0;
+  border: 2px solid #4b5563;
+  box-shadow: 
+    0 -4px 20px rgba(0,0,0,0.3),
+    inset 0 2px 4px rgba(255,255,255,0.1);
+  position: relative;
+  padding: 15px;
+}
+
+/* Screen Content */
+.screen-content {
+  width: 100%;
+  height: 100%;
+  background: #000;
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid #333;
+}
+
+/* Camera */
+.camera {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 6px;
+  background: radial-gradient(circle, #1f2937, #000);
+  border-radius: 50%;
+  border: 1px solid #4b5563;
+}
+
+/* Power Off Screen */
+.power-off-screen {
+  position: absolute;
+  inset: 0;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+}
+
+/* Power Button */
+.power-button {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #4b5563, #374151);
+  border: 2px solid #6b7280;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 
+    0 4px 15px rgba(0,0,0,0.3),
+    inset 0 2px 4px rgba(255,255,255,0.1);
+}
+
+.power-button:hover {
+  background: linear-gradient(135deg, #6b7280, #4b5563);
+  transform: scale(1.05);
+  box-shadow: 
+    0 6px 20px rgba(0,0,0,0.4),
+    inset 0 2px 4px rgba(255,255,255,0.2);
+}
+
+.power-button:active {
+  transform: scale(0.95);
+}
+
+/* Password Screen */
+.password-screen {
+  position: absolute;
+  inset: 0;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #10b981;
+  font-family: 'Courier New', monospace;
+  border-radius: 8px;
+}
+
+.password-container {
+  text-align: center;
+  padding: 20px;
+}
+
+.password-input {
+  border: 1px solid #10b981;
+  padding: 8px 12px;
+  width: 200px;
+  background: #000;
+  color: #10b981;
+  margin: 10px auto;
+  text-align: left;
+  min-height: 24px;
+  font-family: 'Courier New', monospace;
+  border-radius: 4px;
+}
+
+.password-hint {
+  font-size: 12px;
+  color: #059669;
+  margin-top: 10px;
+}
+
+.cursor {
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+/* Desktop Interface */
+.desktop-interface {
+  position: absolute;
+  inset: 0;
+  background: #000;
+  color: #10b981;
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.desktop-content {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
+
+/* File Explorer */
+.file-explorer {
+  width: 33%;
+  border-right: 1px solid #10b981;
+  padding: 8px;
+  overflow-y: auto;
+}
+
+.explorer-header {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #10b981;
+  margin-bottom: 8px;
+  font-weight: bold;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #10b981;
+}
+
+.file-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 8px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  margin-bottom: 2px;
+}
+
+.file-item:hover {
+  background: rgba(16, 185, 129, 0.2);
+}
+
+.file-item.selected {
+  background: rgba(16, 185, 129, 0.3);
+}
+
+.file-name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Content Area */
+.content-area {
+  flex: 1;
+  padding: 8px;
+  overflow-y: auto;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.welcome-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: #059669;
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+/* Terminal */
+.terminal {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  right: 8px;
+  background: #000;
+  border: 1px solid #10b981;
+  border-radius: 4px;
+  padding: 8px;
+  height: 30px;
+  display: flex;
+  align-items: center;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+.terminal-content {
+  color: #10b981;
+  font-family: 'Courier New', monospace;
+  font-size: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .laptop-container {
+    width: 350px;
+    height: 250px;
+    margin-left: -175px;
   }
-  to {
-    transform: rotate(360deg);
+  
+  .laptop-screen {
+    top: -220px;
+    height: 220px;
+  }
+  
+  .power-button {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .desktop-interface {
+    font-size: 9px;
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+@media (max-width: 480px) {
+  .laptop-container {
+    width: 280px;
+    height: 200px;
+    margin-left: -140px;
   }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+  
+  .laptop-screen {
+    top: -180px;
+    height: 180px;
+  }
+  
+  .power-button {
+    width: 35px;
+    height: 35px;
+  }
+  
+  .desktop-interface {
+    font-size: 8px;
+  }
+  
+  .password-input {
+    width: 150px;
+  }
 }
