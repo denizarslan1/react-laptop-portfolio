@@ -1,35 +1,51 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState, useEffect } from 'react'
 
 function App() {
-  const [count, setCount] = useState(0)
+  // tracks whether the laptop is opened or not - start is closed
+  const [isOpened, setIsOpened] = useState(false)
+
+  // sets up a scroll listener
+  useEffect(() => {
+    // checks if the page scrolled more than 100px vertically
+    const handleScroll = () => {
+      if (window.scrollY > 100) {
+        setIsOpened(true)
+      }
+    }
+
+    // attaches the scroll event
+    window.addEventListener('scroll', handleScroll)
+
+    // removes the listener when compnent unmounts to prevent memory leaks
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div style={{ height: '200vh', textAlign: 'center', paddingTop: '150px' }}>
+      {!isOpened ? (
+        <div>
+          <img
+            src="/assets/laptop-closed.png"
+            alt="Closed Laptop"
+            style={{ width: '300px' }}
+          />
+          <p>Scroll down to open the laptop</p>
+        </div>
+      ) : (
+        <div>
+          <img
+            src="/assets/laptop-open.png"
+            alt="Open Laptop"
+            style={{ width: '400px' }}
+          />
+          <p>Laptop is open!</p>
+        </div>
+      )}
+    </div>
   )
 }
 
 export default App
+
